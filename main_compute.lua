@@ -41,8 +41,9 @@ function love.load()
     end
     
     -- Create storage buffer for boids
-    boidBuffer = love.graphics.newBuffer({
-        format = {
+    boidBuffer = love.graphics.newBuffer(
+        "dynamic",
+        {
             {name = "position", format = "floatvec2"},
             {name = "velocity", format = "floatvec2"},
             {name = "radius", format = "float"},
@@ -50,9 +51,8 @@ function love.load()
             {name = "fraction", format = "float"},
             {name = "hp", format = "float"}
         },
-        size = MAX_BOIDS,
-        usage = {"vertex", "storage"}
-    })
+        MAX_BOIDS
+    )
     
     -- Load compute shader
     local shaderCode = love.filesystem.read("boids_compute.glsl")
